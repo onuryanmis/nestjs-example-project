@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { Content } from '../content/content.entity';
 
 @Entity()
 export class Category {
@@ -16,6 +18,9 @@ export class Category {
 
   @Column({ length: '250' })
   description: string;
+
+  @OneToMany(() => Content, (content) => content.category)
+  contents: Content[];
 
   @Column({ default: true })
   isActive: boolean;
